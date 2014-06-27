@@ -13,8 +13,9 @@ Spree::Product.class_eval do
     @_variant_option_values.select { |i| i.option_value_ids.include?(value.id) } # TODO ugly?
   end
 
+  # stock items for any variant that has an option value that is passed in
   def stock_items_for_option_value(value)
-    stock_items.includes(:variant => :option_values).where("spree_option_values.id = #{value.id}")
+    Spree::StockItem.includes(variant: :option_values).where(spree_option_values: {id: value.id}, spree_variants: {product_id: self.id})
   end
 
   def option_value_backorderable?(value)
