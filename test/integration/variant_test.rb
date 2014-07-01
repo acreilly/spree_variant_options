@@ -46,10 +46,13 @@ class ProductTest < ActionDispatch::IntegrationTest
       end
       @variant4.stock_items.each { |stock_item| Spree::StockMovement.create(:quantity => 1, :stock_item => stock_item) }
 
-      Deface::Override.new( :virtual_path => "spree/products/show",
-      :name => "add_other_form_to_spree_variant_options",
-      :insert_after => "div#cart-form",
-      :text => '<div id="wishlist-form"><%= form_for Spree::WishedProduct.new, :url => "foo", :html => {:"data-form-type" => "variant"} do |f| %><%= f.hidden_field :variant_id, :value => @product.master.id %><button type="submit"><%= t(:add_to_wishlist) %></button><% end %></div>')
+      Deface::Override.new(
+        virtual_path: "spree/products/show",
+        name: "add_other_form_to_spree_variant_options",
+        insert_after: "div#cart-form",
+        text: '<div id="wishlist-form"><%= form_for Spree::WishedProduct.new, :url => "foo", :html => {:"data-form-type" => "variant"} do |f| %><%= f.hidden_field :variant_id, :value => @product.master.id %><button type="submit"><%= t(:add_to_wishlist) %></button><% end %></div>',
+        disabled: false
+      )
 
       SpreeVariantOptions::VariantConfig.default_instock = false
 

@@ -17,10 +17,11 @@ end
 
 task :default => [ :test, :cucumber ]
 
-require 'spree/testing_support/extension_rake'
+require 'spree/testing_support/common_rake'
 desc 'Generates a dummy app for testing'
 task :test_app do
   ENV['LIB_NAME'] = 'spree_variant_options'
   ENV['DUMMY_PATH'] = File.expand_path("../test/dummy", __FILE__)
-  Rake::Task['extension:test_app'].invoke
+  ENV['DATABASE'] = 'postgresql'
+  Rake::Task['common:test_app'].invoke
 end

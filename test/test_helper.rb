@@ -2,18 +2,21 @@
 ENV["RAILS_ENV"] = "test"
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
-require "rails/test_help"
-require "shoulda"
-require "factory_girl"
-require "sqlite3"
+require 'active_support'
+require 'active_support/test_case'
+require 'rails/test_help'
+require 'test/unit'
+require 'shoulda'
+require 'factory_girl'
+require 'capybara/rails'
+require 'database_cleaner'
+require 'deface'
 
 begin; require "debugger"; rescue LoadError; end
 begin; require "turn"; rescue LoadError; end
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-require 'capybara/rails'
-require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 Capybara.default_driver = :selenium
 
@@ -32,7 +35,7 @@ class ActionDispatch::IntegrationTest
   end
 end
 
-class Test::Unit::TestCase
+class ActiveSupport::TestCase
   # make Factory Girl syntax available without FactoryGirl.
   include FactoryGirl::Syntax::Methods
   # make spree factories available
