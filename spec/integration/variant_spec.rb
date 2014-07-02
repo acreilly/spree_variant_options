@@ -13,7 +13,7 @@ module Spree
   end
 end
 
-describe 'variant options' do
+describe 'variant options', type: :feature do
 
   context 'with inventory tracking' do
 
@@ -53,6 +53,12 @@ describe 'variant options' do
 
     it 'should disallow choose out of stock variants' do
       Spree::VariantConfiguration.allow_select_outofstock = false
+
+      puts '++++++++++++++++++++++++++++++++++++++++++'
+      puts '++++++++++++++++++++++++++++++++++++++++++'
+      puts @product.inspect
+      puts '++++++++++++++++++++++++++++++++++++++++++'
+      puts '++++++++++++++++++++++++++++++++++++++++++'
 
       visit spree.product_path(@product)
 

@@ -45,7 +45,7 @@ RSpec.configure do |config|
   config.include Spree::TestingSupport::ControllerRequests
   config.extend Spree::TestingSupport::AuthorizationHelpers::Controller, :type => :controller
   config.use_transactional_fixtures = false
-  config.infer_spec_type_from_file_location!
+  #config.infer_spec_type_from_file_location!
   config.include Capybara::DSL
 
   config.before(:each) do
