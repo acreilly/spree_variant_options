@@ -14,17 +14,18 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   # Runtime
-  s.add_dependency('spree_core', '~> 2')
+  s.add_dependency 'spree_core', '2.3.2.beta'
 
   # Development
-  s.add_development_dependency('shoulda')
-  s.add_development_dependency('factory_girl_rails')
-  s.add_development_dependency('sqlite3')
-  s.add_development_dependency('capybara')
-  s.add_development_dependency('selenium-webdriver')
-  s.add_development_dependency('coffee-script')
-  s.add_development_dependency('launchy')
-  s.add_development_dependency('therubyracer')
-  s.add_development_dependency('database_cleaner')
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency 'rspec-activemodel-mocks'
+  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'shoulda'
+  s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'poltergeist'
+  s.add_development_dependency 'coffee-script'
+  s.add_development_dependency 'therubyracer'
+  s.add_development_dependency 'database_cleaner'
 
 end
