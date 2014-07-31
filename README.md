@@ -1,4 +1,4 @@
-# Spree Variant Options [![Build Status](https://secure.travis-ci.org/citrus/spree_variant_options.png)](http://travis-ci.org/citrus/spree_variant_options)
+[ ![Codeship Status for deseretbook/spree_variant_options](https://codeship.io/projects/e0401320-e04b-0131-fce5-3a1d3d24338d/status?branch=master)](https://codeship.io/projects/25125)
 
 
 Spree Variant Options is a very simple spree extension that replaces the radio-button variant selection with groups of option types and values. To get a better idea let's let a few images do the explaining.
