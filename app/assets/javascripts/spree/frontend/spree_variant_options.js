@@ -33,7 +33,7 @@ if (!Array.find_matches) Array.find_matches = function(a) {
 function VariantOptions(params) {
 
   var options = params['options'];
-  var allow_backorders = !params['track_inventory_levels'] ||  params['allow_backorders'];
+  var allow_backorders = !params['track_inventory_levels'] || params['allow_backorders'];
   var allow_select_outofstock = params['allow_select_outofstock'];
   var default_instock = params['default_instock'];
 
@@ -229,6 +229,6 @@ function VariantOptions(params) {
     }
   }
 
-  init()
+  init();
 
 };

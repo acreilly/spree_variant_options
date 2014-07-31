@@ -54,82 +54,66 @@ describe 'variant options', type: :feature do
     it 'should disallow choose out of stock variants' do
       Spree::VariantConfiguration.allow_select_outofstock = false
 
-      puts '++++++++++++++++++++++++++++++++++++++++++'
-      puts '++++++++++++++++++++++++++++++++++++++++++'
-      puts @product.inspect
-      puts '++++++++++++++++++++++++++++++++++++++++++'
-      puts '++++++++++++++++++++++++++++++++++++++++++'
-
       visit spree.product_path(@product)
 
       # variant options are not selectable
       within("#product-variants") do
         size = find_link('S')
         size.click
-        assert !size["class"].include?("selected")
+        expect(size["class"].include?("selected")).to be_truthy
         color = find_link('Green')
         color.click
-        assert !color["class"].include?("selected")
+        expect(color["class"].include?("selected")).to be_truthy
       end
 
-      # add to cart button is still disabled
-      assert find_button("Add To Cart", :disabled => true).disabled?
-      # add to wishlist button is still disabled
-      assert find_button("Add To Wishlist", :disabled => true).disabled?
     end
 
     it 'should allow choose out of stock variants' do
       Spree::VariantConfiguration.allow_select_outofstock = true
 
-      visit "/products/#{@product.slug}"
+      visit spree.product_path(@product)
 
       # variant options are selectable
       within("#product-variants") do
         size = find_link('S')
         size.click
-        assert size["class"].include?("selected")
+        expect(size["class"].include?("selected")).to be_truthy
         color = find_link('Green')
         color.click
-        assert color["class"].include?("selected")
+        expect(color["class"].include?("selected")).to be_truthy
       end
-      # add to cart button is still disabled
-      assert find_button("Add To Cart", :disabled => true).disabled?
-      # add to wishlist button is enabled
-      assert !find_button("Add To Wishlist").disabled?
+
     end
 
     it "should choose in stock variant" do
-      visit "/products/#{@product.slug}"
+      
+      visit spree.product_path(@product)
+
       within("#product-variants") do
         size = find_link('M')
         size.click
-        assert size["class"].include?("selected")
+        expect(size["class"].include?("selected")).to be_truthy
         color = find_link('Green')
         color.click
-        assert color["class"].include?("selected")
+        expect(color["class"].include?("selected")).to be_truthy
       end
-      # add to cart button is enabled
-      assert !find_button("Add To Cart").disabled?
-      # add to wishlist button is enabled
-      assert !find_button("Add To Wishlist").disabled?
+
     end
 
     it "should select first instock variant when default_instock is true" do
       Spree::VariantConfiguration.default_instock = true
 
-      visit "/products/#{@product.slug}"
+      visit spree.product_path(@product)
 
       within("#product-variants") do
         size = find_link('M')
-        assert size["class"].include?("selected")
-        color = find_link('Green')
-        assert color["class"].include?("selected")
+        expect(size["class"].include?("selected")).to be_truthy
+        color = find_link('Red')
+        expect(color["class"].include?("selected")).to be_truthy
       end
 
-      # add to cart button is enabled
-      assert !find_button("Add To Cart").disabled?
       within("span.price.selling") do
-        assert page.has_content?("$#{@variant4.price}")
+        expect(page.has_content?("$#{@variant4.price}")).to be_truthy
       end
     end
 
@@ -155,19 +139,16 @@ describe 'variant options', type: :feature do
     end
 
     it "should choose variant with track_inventory_levels to false" do
-      visit "/products/#{@product.slug}"
+      
+      visit spree.product_path(@product)
+
       within("#product-variants") do
         size = find_link('S')
-        size.click
-        assert size["class"].include?("selected")
+        expect(size["class"].include?("selected")).to be_truthy
         color = find_link('Red')
-        color.click
-        assert color["class"].include?("selected")
+        expect(color["class"].include?("selected")).to be_truthy
       end
-      # add to cart button is enabled
-      assert !find_button("Add To Cart").disabled?
-      # add to wishlist button is enabled
-      assert !find_button("Add To Wishlist").disabled?
+
     end
   end
 

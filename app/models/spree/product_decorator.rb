@@ -9,7 +9,7 @@ Spree::Product.class_eval do
   end
 
   def variants_for_option_value(value)
-    @_variant_option_values ||= variants.includes(:option_values).all
+    @_variant_option_values ||= variants.includes(:option_values).to_a
     @_variant_option_values.select { |i| i.option_value_ids.include?(value.id) } # TODO ugly?
   end
 
