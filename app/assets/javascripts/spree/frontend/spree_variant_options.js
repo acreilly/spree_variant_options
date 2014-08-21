@@ -142,7 +142,7 @@ function VariantOptions(params) {
         }
       }
     } catch(error) {
-      //console.log(error);
+      console.log(error);
     }
     return variants;
   }
@@ -216,12 +216,12 @@ function VariantOptions(params) {
     evt.preventDefault();
     variant = null;
     selection = [];
-    var a = $(this);
-    if (!parent.has(a).length) {
-      clear(divs.index(a.parents('.variant-options:first')));
+    var el = $(this);
+    if (!parent.has(el).length) {
+      clear(divs.index(el.parents('.variant-options:first')));
     }
     disable(buttons);
-    var a = enable(a.addClass('selected'));
+    var a = enable(el.addClass('selected'));
     parent.find('a.clear-button').css('display', 'block');
     advance();
     if (find_variant()) {
