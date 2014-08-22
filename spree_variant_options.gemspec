@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name        = 'spree_variant_options'
-  s.version     = '2.0.0'
+  s.version     = '2.0.2'
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Spencer Steffen"]
-  s.email       = ["spencer@citrusme.com"]
-  s.homepage    = "https://github.com/citrus/spree_variant_options"
+  s.authors     = ["Tim Hogg"]
+  s.email       = ["thogg@deseretbook.com"]
+  s.homepage    = "https://github.com/deseretbook`/spree_variant_options"
   s.summary     = %q{Spree Variant Options is a simple spree extension that replaces the radio-button variant selection with groups of option types and values.}
   s.description = %q{Spree Variant Options is a simple spree extension that replaces the radio-button variant selection with groups of option types and values. Please see the documentation for more details.}
   s.files       = `git ls-files`.split("\n")
