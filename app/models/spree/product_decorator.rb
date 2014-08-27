@@ -1,16 +1,16 @@
 Spree::Product.class_eval do
 
   def option_values
-    @_option_values ||= Spree::OptionValue.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }
+    @option_values ||= Spree::OptionValue.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }
   end
 
   def grouped_option_values
-    @_grouped_option_values ||= option_values.group_by(&:option_type)
+    @grouped_option_values ||= option_values.group_by(&:option_type)
   end
 
   def variants_for_option_value(value)
-    @_variant_option_values ||= variants_including_master.includes(:option_values).to_a
-    @_variant_option_values.select { |i| i.option_value_ids.include?(value.id) } # TODO ugly?
+    @variant_option_values ||= variants_including_master.includes(:option_values).to_a
+    @variant_option_values.select { |i| i.option_value_ids.include?(value.id) } # TODO ugly?
   end
 
   # stock items for any variant that has an option value that is passed in
@@ -22,19 +22,23 @@ Spree::Product.class_eval do
     stock_items_for_option_value(value).where(:backorderable => true).any?
   end
 
+  def option_value_in_stock?(value)
+    self.option_value_backorderable?(value) || self.stock_items_for_option_value(value).to_a.sum(&:count_on_hand) > 0
+  end
+
   def variant_options_hash
-    return @_variant_options_hash if @_variant_options_hash
+    return @variant_options_hash if @variant_options_hash
     hash = {}
-    variants.includes(:option_values).each do |variant|
-      variant.option_values.each do |ov|
-        otid = ov.option_type_id.to_s
-        ovid = ov.id.to_s
-        hash[otid] ||= {}
-        hash[otid][ovid] ||= {}
-        hash[otid][ovid][variant.id.to_s] = variant.to_hash
+    self.variants_including_master.includes(:option_values).each do |variant|
+      variant.option_values.each do |value|
+        type_id = value.option_type_id.to_s
+        value_id = value.id.to_s
+        hash[type_id] ||= {}
+        hash[type_id][value_id] ||= {}
+        hash[type_id][value_id][variant.id.to_s] = variant.to_hash
       end
     end
-    @_variant_options_hash = hash
+    @variant_options_hash = hash
   end
 
 end

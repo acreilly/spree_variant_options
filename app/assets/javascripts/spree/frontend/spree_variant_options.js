@@ -33,9 +33,7 @@ if (!Array.find_matches) Array.find_matches = function(a) {
 function VariantOptions(params) {
 
   var options = params['options'];
-  var allow_backorders = !params['track_inventory_levels'] || params['allow_backorders'];
-  var allow_select_outofstock = params['allow_select_outofstock'];
-  var default_instock = params['default_instock'];
+  var allow_backorders = true;
 
   var variant, divs, parent, index = 0;
   var selection = [];
@@ -49,11 +47,9 @@ function VariantOptions(params) {
     toggle();
     $('.clear-option a.clear-button').hide().click(handle_clear);
 
-    if (default_instock) {
-      divs.each(function(){
-        $(this).find("ul.variant-option-values li a.in-stock:first").click();
-      });
-    }
+    divs.each(function(){
+      $(this).find("ul.variant-option-values li a.in-stock:first").click();
+    });
   }
 
   function get_index(parent) {
@@ -73,8 +69,6 @@ function VariantOptions(params) {
 
   function enable(btns) {
     bt = btns.not('.unavailable').removeClass('locked').unbind('click');
-    if (!allow_select_outofstock && !allow_backorders)
-      bt = bt.filter('.in-stock');
     return bt.click(handle_click).filter('.auto-click').removeClass('auto-click').click();
   }
 
@@ -203,7 +197,7 @@ function VariantOptions(params) {
       disable($(element).find('a.option-value').show().removeClass('in-stock out-of-stock').addClass('locked').unbind('click'));
       $(element).find('a.clear-button').hide();
     });
-    show_all_variant_images();
+    //show_all_variant_images();
   }
 
 
