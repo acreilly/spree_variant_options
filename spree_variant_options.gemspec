@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.requirements << 'none'
 
   # Runtime
-  s.add_dependency 'spree_core', '~> 2.2.0'
+  s.add_dependency 'spree_core', '~> 2.3'
 
   # Development
   s.add_development_dependency 'rspec-rails'
