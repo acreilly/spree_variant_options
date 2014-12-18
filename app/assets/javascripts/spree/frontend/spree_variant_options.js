@@ -33,7 +33,7 @@ if (!Array.find_matches) Array.find_matches = function(a) {
 function VariantOptions(params) {
 
   var options = params['options'];
-  var allow_backorders = true;
+  // var allow_backorders = true;
 
   var variant, divs, parent, index = 0;
   var selection = [];
@@ -100,13 +100,17 @@ function VariantOptions(params) {
         disable($(element).addClass('unavailable locked').unbind('click'));
       } else if (keys.length == 1) {
         _var = variants[keys[0]];
-        $(element).addClass((allow_backorders || _var.count || _var.backorderable) ? selection.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
+        allow_backorders = _var.backorderable
+        $(element).addClass((allow_backorders || _var.count) ? selection.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
       } else if (allow_backorders) {
         $(element).addClass('in-stock');
       } else {
         $.each(variants, function(key, value) { count += value.count; });
         $(element).addClass(count ? 'in-stock' : 'out-of-stock');
       }
+      if($(element).hasClass('out-of-stock')){
+          disable($(element).addClass('unavailable locked').unbind('click'));
+        }
     });
   }
 
