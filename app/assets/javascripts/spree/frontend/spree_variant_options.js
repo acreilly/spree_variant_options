@@ -50,6 +50,9 @@ function VariantOptions(params) {
     divs.each(function(){
       $(this).find("ul.variant-option-values li a:first").click()
     });
+    if($("#variant_id")[0].value === ""){
+      disable($("#add-to-cart"))
+    }
   }
 
   function get_index(parent) {
