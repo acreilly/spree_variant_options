@@ -33,7 +33,7 @@ if (!Array.find_matches) Array.find_matches = function(a) {
 function VariantOptions(params) {
 
   var options = params['options'];
-  // var allow_backorders = true;
+  var allow_backorders = true;
 
   var variant, divs, parent, index = 0;
   var selection = [];
@@ -46,9 +46,8 @@ function VariantOptions(params) {
     enable(parent.find('a.option-value'));
     toggle();
     $('.clear-option a.clear-button').hide().click(handle_clear);
-
     divs.each(function(){
-      $(this).find("ul.variant-option-values li .in-stock:first").click()
+      $(this).find("ul.variant-option-values li a:first").click()
     });
   }
 
@@ -100,8 +99,7 @@ function VariantOptions(params) {
         disable($(element).addClass('unavailable locked').unbind('click'));
       } else if (keys.length == 1) {
         _var = variants[keys[0]];
-        allow_backorders = _var.backorderable
-        $(element).addClass((allow_backorders || _var.count) ? selection.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
+        $(element).addClass((_var.count || _var.backorderable) ? selection.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
       } else if (allow_backorders) {
         $(element).addClass('in-stock');
       } else {
@@ -109,8 +107,8 @@ function VariantOptions(params) {
         $(element).addClass(count ? 'in-stock' : 'out-of-stock');
       }
       if($(element).hasClass('out-of-stock')){
-          disable($(element).addClass('unavailable locked').unbind('click'));
-        }
+        disable($(element).addClass('unavailable locked').unbind('click'));
+      }
     });
   }
 
@@ -173,7 +171,7 @@ function VariantOptions(params) {
     if (variant) {
       $('#variant_id, form[data-form-type="variant"] input[name$="[variant_id]"]').val(variant.id);
       $('#product-price .price').removeClass('unselected').text(variant.price);
-      if (variant.count > 0 || allow_backorders)
+      if (variant.count > 0 || variant.backorderable)
         $('#cart-form button[type=submit]').attr('disabled', false).fadeTo(0.5, 1);
       $('form[data-form-type="variant"] button[type=submit]').attr('disabled', false).fadeTo(0.5, 1);
       try {
@@ -225,7 +223,9 @@ function VariantOptions(params) {
     if (find_variant()) {
       toggle();
     }
-    $("[rel='" + last_size + "']").click()
+    if($(".variant-options.Color").length != 0){
+      $("[rel='" + last_size + "']").click()
+    }
   }
 
   init();
