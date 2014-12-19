@@ -211,6 +211,7 @@ function VariantOptions(params) {
 
   function handle_click(evt) {
     evt.preventDefault();
+    var last_size = $(".option-value.selected.Size").attr("rel")
     variant = null;
     selection = [];
     var el = $(this);
@@ -224,6 +225,7 @@ function VariantOptions(params) {
     if (find_variant()) {
       toggle();
     }
+    $("[rel='" + last_size + "']").click()
   }
 
   init();
