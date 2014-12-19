@@ -47,7 +47,7 @@ function VariantOptions(params) {
     toggle();
     $('.clear-option a.clear-button').hide().click(handle_clear);
     divs.each(function(){
-      $(this).find("ul.variant-option-values li a:first").click()
+      $(this).find("ul.variant-option-values li .in_stock:first").click()
     });
   }
 
