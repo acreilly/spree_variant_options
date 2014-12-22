@@ -6,7 +6,7 @@ Spree::Admin::VariantsController.class_eval do
     @deleted = (params.key?(:deleted) && params[:deleted] == "on") ? "checked" : ""
 
     if @deleted.blank?
-      @collection ||= parent.variants_including_master
+      @collection ||= super
     else
       @collection ||= Variant.only_deleted.where(:product_id => parent.id)
     end
