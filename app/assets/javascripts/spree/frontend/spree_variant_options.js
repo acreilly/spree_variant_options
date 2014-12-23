@@ -210,6 +210,7 @@ function VariantOptions(params) {
   function handle_click(evt) {
     evt.preventDefault();
     var last_size = $(".option-value.selected.Size").attr("rel")
+    var last_color = $(".option-value.selected.roundedOne").attr("rel")
     variant = null;
     selection = [];
     var el = $(this);
@@ -223,7 +224,7 @@ function VariantOptions(params) {
     if (find_variant()) {
       toggle();
     }
-    if($(".variant-options.Color").length != 0){
+    if($(".variant-options.Color").length != 0 && last_color != $(".option-value.selected.roundedOne").attr("rel")){
       $("[rel='" + last_size + "']").click()
     }
   }
