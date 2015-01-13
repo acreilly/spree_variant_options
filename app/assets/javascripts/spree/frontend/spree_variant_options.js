@@ -225,7 +225,11 @@ function VariantOptions(params) {
       toggle();
     }
     if($(".variant-options.Color").length != 0 && last_color != $(".option-value.selected.roundedOne").attr("rel")){
-      $("[rel='" + last_size + "']").click()
+      if($("[rel='" + last_size + "']").hasClass("out-of-stock")){
+        $(".Size.in-stock").first().click()
+      } else{
+        $("[rel='" + last_size + "']").click()
+      }
     }
   }
 
