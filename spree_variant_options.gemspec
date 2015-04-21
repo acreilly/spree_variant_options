@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'spree_variant_options'
-  s.version     = '2.1'
+  s.version     = '2.2'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Tim Hogg"]
   s.email       = ["thogg@deseretbook.com"]

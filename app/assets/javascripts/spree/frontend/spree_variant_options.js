@@ -231,6 +231,9 @@ function VariantOptions(params) {
         $("[rel='" + last_size + "']").click()
       }
     }
+    if($(".popover").css("display") === "block"){
+      $(".popover").toggle()
+    }
   }
 
   init();
