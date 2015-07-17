@@ -45,6 +45,7 @@ function VariantOptions(params) {
     update();
     enable(parent.find('a.option-value'));
     toggle();
+    $('#stock a').first().addClass('active')
     $('.clear-option a.clear-button').hide().click(handle_clear);
     divs.each(function(){
       $(this).find("ul.variant-option-values li .in-stock:first").click()
@@ -224,6 +225,12 @@ function VariantOptions(params) {
     if (find_variant()) {
       toggle();
     }
+
+    $('.Size a.Size').parent().css('display', 'block')
+    if($('#stock a.active').is('#in-stock')){
+      $('.Size a.Size.out-of-stock').parent().css('display', 'none')
+    }
+
     if($(".variant-options.Color").length != 0 && last_color != $(".option-value.selected.roundedOne").attr("rel")){
       if($("[rel='" + last_size + "']").hasClass("out-of-stock")){
         $(".Size.in-stock").first().click()
@@ -231,8 +238,9 @@ function VariantOptions(params) {
         $("[rel='" + last_size + "']").click()
       }
     }
+
     if($(".popover").css("display") === "block"){
-      $(".popover").toggle()
+      $(".popover").css("display", "none")
     }
   }
 
