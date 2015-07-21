@@ -108,7 +108,7 @@ function VariantOptions(params) {
         $(element).addClass(count ? 'in-stock' : 'out-of-stock');
       }
       if($(element).hasClass('out-of-stock')){
-        // disable($(element).addClass('unavailable'));
+        disable($(element).addClass('unavailable'));
       }
     });
   }
