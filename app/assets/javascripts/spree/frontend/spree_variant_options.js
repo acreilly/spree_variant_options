@@ -64,7 +64,7 @@ function VariantOptions(params) {
   }
 
   function disable(btns) {
-    // return btns.removeClass('selected');
+    return btns.removeClass('selected');
   }
 
   function enable(btns) {
@@ -222,6 +222,7 @@ function VariantOptions(params) {
     var a = enable(el.addClass('selected'));
     parent.find('a.clear-button').css('display', 'block');
     advance();
+
     if (find_variant()) {
       toggle();
     }
