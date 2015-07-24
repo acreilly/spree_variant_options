@@ -108,7 +108,7 @@ function VariantOptions(params) {
         $(element).addClass(count ? 'in-stock' : 'out-of-stock');
       }
       if($(element).hasClass('out-of-stock')){
-        disable($(element).addClass('unavailable'));
+        disable($(element).addClass('unavailable').unbind('click'));
       }
     });
   }
@@ -196,7 +196,7 @@ function VariantOptions(params) {
     enable(buttons.removeClass('selected'));
     toggle();
     parent.nextAll().each(function(index, element) {
-      disable($(element).find('a.option-value').show().removeClass('in-stock out-of-stock').addClass('locked'));
+      disable($(element).find('a.option-value').show().removeClass('in-stock out-of-stock').addClass('locked').unbind('click'));
       $(element).find('a.clear-button').hide();
     });
     //show_all_variant_images();
@@ -222,7 +222,6 @@ function VariantOptions(params) {
     var a = enable(el.addClass('selected'));
     parent.find('a.clear-button').css('display', 'block');
     advance();
-
     if (find_variant()) {
       toggle();
     }
