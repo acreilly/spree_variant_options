@@ -101,6 +101,10 @@ function VariantOptions(params) {
       } else if (keys.length == 1) {
         _var = variants[keys[0]];
         $(element).addClass((_var.count || _var.backorderable || _var.special_stock) ? selection.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
+
+        if (_var.special_stock){
+          $(element).addClass('special-stock')
+        }
       } else if (allow_backorders) {
         $(element).addClass('in-stock');
       } else {
