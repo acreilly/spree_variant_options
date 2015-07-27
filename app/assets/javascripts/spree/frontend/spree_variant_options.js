@@ -93,7 +93,7 @@ function VariantOptions(params) {
         selection = m;
       }
     });
-    btns.removeClass('in-stock out-of-stock unavailable').each(function(i, element) {
+    btns.removeClass('in-stock out-of-stock unavailable special-stock').each(function(i, element) {
       variants = get_variant_objects(element.rel);
       keys = $.keys(variants);
       if (keys.length == 0) {
@@ -200,7 +200,7 @@ function VariantOptions(params) {
     enable(buttons.removeClass('selected'));
     toggle();
     parent.nextAll().each(function(index, element) {
-      disable($(element).find('a.option-value').show().removeClass('in-stock out-of-stock').addClass('locked').unbind('click'));
+      disable($(element).find('a.option-value').show().removeClass('in-stock out-of-stock special-stock').addClass('locked').unbind('click'));
       $(element).find('a.clear-button').hide();
     });
     //show_all_variant_images();
@@ -233,6 +233,7 @@ function VariantOptions(params) {
     $('.Size a.Size').parent().css('display', 'block')
     if($('#stock a.active').is('#in-stock')){
       $('.Size a.Size.out-of-stock').parent().css('display', 'none')
+      $('.Size a.Size.special-stock').parent().css('display', 'none')
     }
 
     if($(".variant-options.Color").length != 0 && last_color != $(".option-value.selected.roundedOne").attr("rel")){
