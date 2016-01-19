@@ -68,7 +68,7 @@ function VariantOptions(params) {
   }
 
   function enable(btns) {
-    bt = btns.not('.unavailable').removeClass('locked').unbind('click');
+    bt = btns.removeClass('locked').unbind('click');
     return bt.click(handle_click).filter('.auto-click').removeClass('auto-click').click();
   }
 
@@ -186,6 +186,7 @@ function VariantOptions(params) {
       }
     } else {
       $('#variant_id, form[data-form-type="variant"] input[name$="[variant_id]"]').val('');
+      $('#cart-form button[type=submit], form[data-form-type="variant"] button[type=submit]').attr('disabled', true).fadeTo(0, 0.5);
       price = $('#product-price .price').addClass('unselected');
       // Replace product price by "(select)" only when there are at least 1 variant not out-of-stock
       variants = $("div.variant-options.index-0");
@@ -242,10 +243,6 @@ function VariantOptions(params) {
       } else{
         $("[rel='" + last_size + "']").click()
       }
-    }
-
-    if($(".popover").css("display") === "block"){
-      $(".popover").css("display", "none")
     }
   }
 
