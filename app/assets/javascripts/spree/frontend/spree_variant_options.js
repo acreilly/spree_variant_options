@@ -166,7 +166,7 @@ function VariantOptions(params) {
       if (prices.length == 1) {
         $('#product-price .price').html('<span class="price assumed">' + prices[0] + '</span>');
       } else {
-        $('#product-price .price').html('<span class="price from">' + prices[0] + '</span> - <span class="price to">' + prices[prices.length - 1] + '</span>');
+        $('#product-price .price').html('<span class="price assumed">' + prices[0] + '</span>');
       }
       return false;
     }
