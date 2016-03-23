@@ -26,7 +26,7 @@ Spree::Product.class_eval do
     self.option_value_backorderable?(value) || self.stock_items_for_option_value(value).to_a.sum(&:count_on_hand) > 0
   end
 
-  def variant_options_hash
+  def variant_options_hash(current_currency)
     return @variant_options_hash if @variant_options_hash
     hash = {}
     self.variants_including_master.includes(:option_values).each do |variant|
@@ -35,7 +35,7 @@ Spree::Product.class_eval do
         value_id = value.id.to_s
         hash[type_id] ||= {}
         hash[type_id][value_id] ||= {}
-        hash[type_id][value_id][variant.id.to_s] = variant.to_hash
+        hash[type_id][value_id][variant.id.to_s] = variant.to_hash(current_currency)
       end
     end
     @variant_options_hash = hash

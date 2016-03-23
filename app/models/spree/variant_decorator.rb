@@ -2,8 +2,8 @@ Spree::Variant.class_eval do
 
   include ActionView::Helpers::NumberHelper
 
-  def to_hash
-    actual_price  = self.price
+  def to_hash(current_currency)
+    actual_price = self.price_in(current_currency).amount
     {
       :id    => self.id,
       :count => self.stock_items.to_a.sum(&:count_on_hand),
